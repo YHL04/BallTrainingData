@@ -1,29 +1,48 @@
 import numpy as np
 import json
-from PIL import Image
+from PIL import Image, ImageDraw
 import os
+import ast
 
-def main():
-    drt = os.path.join("RawImage", "Pic30.jpg")
+
+def getPic():
+    drt = os.path.join("RawImage", "Pic6.jpg")
     img = Image.open(drt)
     width, height = img.size
 
-    '''
-    area = (0, 0, width/2, height/2)
-    img = img.crop(area)
-    '''
-    img.show()
-
+    return img
+    
     
 def getAnn():
-    drt = os.path.join("RawAnn", "Ann30.jpg.json")
+    drt = os.path.join("RawAnn", "Ann6.jpg.json")
+    
     with open(drt) as json_file:
         data = json.load(json_file)
-        for p in data:
-            print(p)
+        
+        print(str(len(data['objects'])), 'fuel cells found.')
 
-main()
+        
+        for p in data['objects']:
+            points = p['points']
+            exterior = points['exterior']
+            array = np.asarray(exterior)
+            
+    return array
+
+def main():
+    pic = getPic()
+    ann = getAnn()
+
+    draw = ImageDraw.Draw(pic)
+    draw.line((ann[0][0], ann[0][1]) + (ann[1][0], ann[1][1]), fill=(255, 0, 0))
+    del draw
+
+    pic.show()
+    
 getAnn()
+#main()
+
+
 
 
 
