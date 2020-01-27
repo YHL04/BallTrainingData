@@ -2,7 +2,6 @@ import numpy as np
 import json
 from PIL import Image, ImageDraw
 import os
-import ast
 
 
 def getPic():
