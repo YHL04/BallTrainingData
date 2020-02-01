@@ -9,9 +9,13 @@ def main():
         rawann_dir = "/RawAnn"
         rawimg_dir = "/RawPic"
 
+        i = 0
+        
         for picfile in os.listdir(img_dir):
             for annfile in os.listdir(ann_dir):
                 if annfile == picfile + ".json":
+                    
+                    copyfile(ann_dir + "/" + annfile, rawann_dir + "/" + )
                     
                     
                     
