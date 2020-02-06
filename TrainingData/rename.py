@@ -1,25 +1,15 @@
 import os
-from shutil import copyfile
-
 
 def main():
-    for x in range(1, 4):
-        ann_dir = "/DownloadedFile/ann" + str(x)
-        img_dir = "/DownloadedFile/img" + str(x)
-        rawann_dir = "/RawAnn"
-        rawimg_dir = "/RawPic"
+    i = 0
+    directory = "DownloadedFile/img3/"
+    
+    for filename in os.listdir(directory):
+        dst = directory + "Pic" + str(i) + ".jpg"
+        src = directory + filename
 
-        i = 0
-        
-        for picfile in os.listdir(img_dir):
-            for annfile in os.listdir(ann_dir):
-                if annfile == picfile + ".json":
-                    
-                    copyfile(ann_dir + "/" + annfile, rawann_dir + "/" + )
-                    
-                    
-                    
-
+        os.rename(src, dst)
+        i+=1
 
 main()
 print("done")
